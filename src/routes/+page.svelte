@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>Delvup.</title>
+	<title>Delvup — Design, develop & care websites</title>
 	<meta
 		name="description"
 		content="Delvup – Design, sviluppo e supporto di siti web, brands e prodotti digitali."

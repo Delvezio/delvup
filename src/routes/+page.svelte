@@ -6,10 +6,10 @@
 </script>
 
 <svelte:head>
-	<title>delvup — Work in progress</title>
+	<title>Delvup.</title>
 	<meta
 		name="description"
-		content="Delvup, portfolio online di Alessandro. Work in progress."
+		content="Delvup – Design, sviluppo e supporto di siti web, brands e prodotti digitali."
 	/>
 </svelte:head>
 

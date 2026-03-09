@@ -1,0 +1,145 @@
+<script lang="ts">
+	import { onMount, tick } from 'svelte';
+
+	type TagName = 'h1' | 'h2' | 'h3' | 'p' | 'div';
+
+	export let as: TagName = 'h1';
+	export let lines: string[] = [];
+	export let trigger = true;
+	export let observe = false;
+	export let once = true;
+
+	export let baseDelay = 0;
+	export let stepDelay = 140;
+	export let duration = 1100;
+
+	export let className = '';
+
+	let root: HTMLElement;
+	let isVisible = false;
+	let mounted = false;
+	let wasTriggered = false;
+	let hasAnimated = false;
+	let observer: IntersectionObserver | null = null;
+
+	async function play() {
+		if (once && hasAnimated) return;
+
+		isVisible = false;
+		await tick();
+
+		requestAnimationFrame(() => {
+			isVisible = true;
+			hasAnimated = true;
+		});
+	}
+
+	onMount(() => {
+		mounted = true;
+
+		if (observe) {
+			observer = new IntersectionObserver(
+				([entry]) => {
+					if (entry.isIntersecting) {
+						void play();
+
+						if (once) {
+							observer?.disconnect();
+						}
+					} else if (!once) {
+						isVisible = false;
+					}
+				},
+				{
+					threshold: 0.2,
+					rootMargin: '0px 0px -10% 0px'
+				}
+			);
+
+			if (root) observer.observe(root);
+
+			return () => observer?.disconnect();
+		}
+
+		if (trigger) {
+			wasTriggered = true;
+			void play();
+		}
+
+		return () => observer?.disconnect();
+	});
+
+	$: if (mounted && !observe && trigger && !wasTriggered) {
+		wasTriggered = true;
+		void play();
+	}
+
+	$: if (mounted && !observe && !trigger && wasTriggered) {
+		wasTriggered = false;
+
+		if (!once) {
+			isVisible = false;
+		}
+	}
+</script>
+
+<svelte:element
+	this={as}
+	bind:this={root}
+	class={`font-title m-0 ${className}`}
+>
+	{#each lines as line, index (`${index}-${line}`)}
+		<span
+			class={`reveal-line-mask block overflow-hidden [perspective:1200px] ${index > 0 ? '-mt-[0.08em]' : ''}`}
+		>
+			<span
+				class="reveal-line-inner block origin-top will-change-transform"
+				class:reveal-line-visible={isVisible}
+				style={`--reveal-delay:${baseDelay + index * stepDelay}ms; --reveal-duration:${duration}ms;`}
+			>
+				{line}
+			</span>
+		</span>
+	{/each}
+</svelte:element>
+
+<style>
+	.reveal-line-mask {
+		padding-top: 0.08em;
+		padding-bottom: 0.26em;
+		margin-top: -0.08em;
+		margin-bottom: -0.26em;
+	}
+
+	.reveal-line-inner {
+		opacity: 0;
+		transform: translate3d(0, 95%, 0) rotateX(-80deg);
+		backface-visibility: hidden;
+	}
+
+	.reveal-line-visible {
+		animation: line-reveal var(--reveal-duration) cubic-bezier(0.25, 0, 0, 1) forwards;
+		animation-delay: var(--reveal-delay);
+	}
+
+	@keyframes line-reveal {
+		0% {
+			opacity: 0;
+			transform: translate3d(0, 95%, 0) rotateX(-80deg);
+		}
+
+		100% {
+			opacity: 1;
+			transform: translate3d(0, 0, 0) rotateX(0deg);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.reveal-line-inner,
+		.reveal-line-visible {
+			opacity: 1;
+			transform: none;
+			animation: none;
+		}
+	}
+</style>

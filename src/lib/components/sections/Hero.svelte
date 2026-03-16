@@ -48,7 +48,7 @@
 
 						<span>
 							<span class="inline-flex flex-wrap">
-								<span><a href="#contact" class="underline transition">scrivimi</a> ✍️</span>
+								<span><a href="mailto:ciao@delvup.com" target="_blank" class="underline transition">scrivimi</a> ✍️</span>
 							</span>
 						</span>
 					</RevealLines>

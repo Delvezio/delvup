@@ -8,50 +8,29 @@
 <Section as="header" className="relative z-30">
 	<Container width="site">
 		<div
-			class="flex flex-row justify-between items-center gap-4 py-4 transition-all duration-700 delay-250 sm:py-5 lg:py-6"
+			class="flex flex-row justify-between items-start gap-4 py-4 transition-all duration-700 sm:py-5 lg:py-6"
 			class:pointer-events-none={!$introDone}
 			class:translate-y-4={!$introDone}
 			class:opacity-0={!$introDone}
 			class:translate-y-0={$introDone}
 			class:opacity-100={$introDone}
 		>
-			<!-- <nav
-				class="col-span-8 flex items-center gap-4 sm:gap-6 lg:col-span-3 lg:gap-8"
-				aria-label="Primary"
-			>
-				<a
-					href="#work"
-					class="font-title text-fluid-h3 leading-none text-zinc-900 no-underline"
-				>
-					Lavori
-				</a>
-
-				<a
-					href="#contact"
-					class="font-title text-fluid-h3 leading-none text-zinc-900 no-underline"
-				>
-					Contatti
-				</a>
-			</nav> -->
-
-
 			<p
-				class="font-title text-sm lg:text-base col-span-12 m-0 text-left leading-[1.25] text-zinc-900/40 lg:col-span-6"
+				class="font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-400 lg:col-span-4"
 			>
-				Design / develop <br />
-				& care
+				Design /<br />
+				Dev & Care
 			</p>
 
 			<p
-				class="font-title text-sm lg:text-base col-span-12 m-0 text-left leading-[1.25] text-zinc-900/40 lg:col-span-6"
+				class="hidden md:block font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-400 lg:col-span-4"
 			>
-				Websites, brands <br />
-				and digital products.
+				Websites, brands<br />
+				digital and other stuff.
 			</p>
-
 
 			<a
-				class="col-span-4 justify-self-end lg:col-span-3"
+				class="col-span-4 justify-self-end lg:col-span-2 lg:col-start-11"
 				href={resolve('/')}
 				aria-label="Delvup home"
 			>

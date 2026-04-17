@@ -1,5 +1,6 @@
 <script lang="ts">
 	import IntroBrand from '$lib/components/sections/IntroBrand.svelte';
+	import BackgroundVideo from '$lib/components/sections/BackgroundVideo.svelte';
 	import Header from '$lib/components/sections/Header.svelte';
 	import Hero from '$lib/components/sections/Hero.svelte';
 	import Footer from '$lib/components/sections/Footer.svelte';
@@ -13,8 +14,11 @@
 	/>
 </svelte:head>
 
-<main class="relative grid h-dvh grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden bg-white">
+<main
+	class="relative grid h-dvh grid-rows-[auto_minmax(0,1fr)_auto] overflow-hidden bg-[var(--color-bg)] text-[var(--color-text)]"
+>
 	<IntroBrand />
+	<BackgroundVideo />
 	<Header />
 	<Hero />
 	<Footer />

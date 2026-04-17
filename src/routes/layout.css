@@ -34,9 +34,11 @@
 }
 
 :root {
-	--color-bg: #ffffff;
-	--color-text: #111111;
-	--color-muted: #71717a;
+	--color-bg: #000000;
+	--color-text: #f5f5f5;
+	--color-muted: #b3b3ba;
+	--color-surface: #ffffff;
+	--color-intro-panel: #212121;
 }
 
 html {

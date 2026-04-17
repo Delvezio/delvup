@@ -28,6 +28,7 @@
 	 * quando diventa true, il pannello continua il suo movimento ed esce a destra.
 	 */
 	let panelLeaving = false;
+	let baseLeaving = false;
 
 	/**
 	 * Stati del brand / logo.
@@ -171,6 +172,18 @@
 			);
 
 			/**
+			 * 7) USCITA DEL PANNELLO CHIARO
+			 *
+			 * Parte solo quando il pannello scuro ha già terminato la sua uscita,
+			 * così i due layer risultano ben distinti.
+			 */
+			timers.push(
+				setTimeout(() => {
+					baseLeaving = true;
+				}, 4140)
+			);
+
+			/**
 			 * 7) ATTIVAZIONE CONTENUTO PAGINA
 			 *
 			 * Qui diciamo a Header / Hero che l'intro è finita,
@@ -182,7 +195,7 @@
 			timers.push(
 				setTimeout(() => {
 					introDone.set(true);
-				}, 3800)
+				}, 4320)
 			);
 
 			/**
@@ -194,7 +207,7 @@
 			timers.push(
 				setTimeout(() => {
 					introGone = true;
-				}, 6400)
+				}, 6200)
 			);
 		}
 
@@ -209,6 +222,8 @@
 
 {#if mounted && !introGone}
 	<div class="intro-root pointer-events-none absolute inset-0 z-50 overflow-hidden">
+		<div class="intro-base absolute inset-0" class:base-leaving={baseLeaving}></div>
+
 		<!--
 			PANNELLO SCURO
 			- parte da sinistra fuori viewport
@@ -216,7 +231,7 @@
 			- poi esce a destra
 		-->
 		<div
-			class="intro-panel absolute inset-y-0 left-0 h-full w-full bg-[#212121]"
+			class="intro-panel absolute inset-y-0 left-0 h-full w-full"
 			class:panel-covered={panelCovered}
 			class:panel-leaving={panelLeaving}
 		></div>
@@ -237,7 +252,7 @@
 				>
 				<!-- BLOCCO LOGO TESTUALE -->
 				<div class="relative w-full overflow-hidden" class:logo-open={logoRevealed}>
-					<div class="overlay-logo absolute inset-y-0 left-0 h-full w-full bg-[#212121]"></div>
+					<div class="overlay-logo absolute inset-y-0 left-0 h-full w-full"></div>
 
 					<svg
 						class="block h-auto w-full"
@@ -271,7 +286,7 @@
 
 				<!-- BLOCCO FRECCIA / UP -->
 				<div class="relative w-full overflow-hidden" class:up-open={upRevealed}>
-					<div class="overlay-up absolute inset-y-0 right-0 h-full w-full bg-[#212121]"></div>
+					<div class="overlay-up absolute inset-y-0 right-0 h-full w-full"></div>
 
 					<svg
 						class="block h-auto w-full"
@@ -305,11 +320,23 @@
 		background: transparent;
 	}
 
+	.intro-base {
+		background: var(--color-surface);
+		transform: translateX(0);
+		will-change: transform;
+		transition: transform 0.32s cubic-bezier(0.58, 0, 0.3, 1);
+	}
+
+	.base-leaving {
+		transform: translateX(100%);
+	}
+
 	/*
 		PANNELLO PRINCIPALE
 		Stato iniziale: completamente fuori schermo a sinistra.
 	*/
 	.intro-panel {
+		background: var(--color-intro-panel);
 		transform: translateX(-100%);
 		will-change: transform;
 
@@ -341,7 +368,7 @@
 	*/
 	.panel-leaving {
 		transform: translateX(100%);
-		transition-duration: 0.5s;
+		transition-duration: 0.54s;
 	}
 
 	/*
@@ -391,6 +418,7 @@
 		L'overlay si restringe fino a 0 e lascia vedere il logo.
 	*/
 	.overlay-logo {
+		background: var(--color-intro-panel);
 		transition: width 0.9s ease;
 	}
 
@@ -403,6 +431,7 @@
 		Stesso principio, con durata leggermente diversa.
 	*/
 	.overlay-up {
+		background: var(--color-intro-panel);
 		transition: width 0.7s ease;
 	}
 

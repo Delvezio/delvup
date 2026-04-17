@@ -16,14 +16,14 @@
 			class:opacity-100={$introDone}
 		>
 			<p
-				class="font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-400 lg:col-span-4"
+				class="font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-300 lg:col-span-4"
 			>
 				Design /<br />
 				Dev & Care
 			</p>
 
 			<p
-				class="hidden md:block font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-400 lg:col-span-4"
+				class="hidden md:block font-sm font-title col-span-8 m-0 max-w-[18ch] text-left leading-5 text-zinc-300 lg:col-span-4"
 			>
 				Websites, brands<br />
 				digital and other stuff.
@@ -35,7 +35,7 @@
 				aria-label="Delvup home"
 			>
 				<img
-					src="/brand/logo.svg"
+					src="/brand/logo-on-dark.svg"
 					alt="Delvup"
 					class="block h-auto w-[clamp(4rem,18vw,6.5rem)]"
 				/>

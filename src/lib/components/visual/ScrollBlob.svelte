@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { introDone } from '$lib/stores/intro';
 	let host: HTMLDivElement;
 	let canvas: HTMLCanvasElement;
 	let ready = $state(false);
@@ -23,7 +24,7 @@
 			}
 			const scene = new THREE.Scene();
 			const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 30);
-			camera.position.z = 6.8;
+			camera.position.z = 5.9;
 			renderer.setClearColor(0, 0);
 			renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
 			renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -38,14 +39,14 @@
 			const positions = geometry.attributes.position;
 			const original = new Float32Array(positions.array);
 			const material = new THREE.MeshStandardMaterial({
-				color: 0xe6e1ef,
+				color: 0xc4a3f2,
 				metalness: 1,
 				roughness: 0.105,
 				envMapIntensity: 1.7
 			});
 			const mesh = new THREE.Mesh(geometry, material);
 			scene.add(mesh);
-			const fill = new THREE.DirectionalLight(0xb59bff, 3);
+			const fill = new THREE.DirectionalLight(0x9560ed, 4);
 			fill.position.set(-3, 1, 2);
 			scene.add(fill);
 			let frame = 0,
@@ -63,7 +64,7 @@
 			function measure() {
 				mobile = innerWidth <= 680;
 				reduced = preference.matches;
-				size = mobile ? 220 : Math.min(440, innerWidth * 0.34);
+				size = mobile ? 270 : Math.min(540, innerWidth * 0.41);
 				renderer.setSize(size, size);
 				host.style.width = host.style.height = `${size}px`;
 				const hero = document.querySelector('.hero') as HTMLElement;
@@ -192,7 +193,7 @@
 </script>
 
 <div class="scroll-blob" class:active={ready} bind:this={host} aria-hidden="true">
-	<canvas bind:this={canvas} class:hidden={!ready}></canvas>
+	<canvas bind:this={canvas} class:hidden={!ready} class:entered={$introDone}></canvas>
 </div>
 
 <style>
@@ -216,6 +217,13 @@
 		width: 100%;
 		height: 100%;
 		display: block;
+	}
+	.scroll-blob canvas {
+		opacity: 0;
+		transition: opacity 1s ease;
+	}
+	.scroll-blob canvas.entered {
+		opacity: 1;
 	}
 	.scroll-blob canvas.hidden {
 		display: none;

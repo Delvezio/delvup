@@ -60,6 +60,13 @@
 
 	onMount(() => {
 		let destroyed = false;
+		if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			introGone = true;
+			introDone.set(true);
+			return;
+		}
+		const oldOverflow = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
 		const timers: ReturnType<typeof setTimeout>[] = [];
 
 		async function startIntro() {
@@ -150,11 +157,11 @@
 			 * - più ravvicinato = più veloce / nervoso
 			 * - più distante = più elegante / leggibile
 			 */
-			setTimeout(() => (dOut = true), 3000);
-			setTimeout(() => (eOut = true), 3150);
-			setTimeout(() => (lOut = true), 3250);
-			setTimeout(() => (vOut = true), 3300);
-			setTimeout(() => (arrowOut = true), 3330);
+			timers.push(setTimeout(() => (dOut = true), 3000));
+			timers.push(setTimeout(() => (eOut = true), 3150));
+			timers.push(setTimeout(() => (lOut = true), 3250));
+			timers.push(setTimeout(() => (vOut = true), 3300));
+			timers.push(setTimeout(() => (arrowOut = true), 3330));
 
 			/**
 			 * 6) USCITA DEL PANNELLO SCURO VERSO DESTRA
@@ -195,6 +202,7 @@
 			timers.push(
 				setTimeout(() => {
 					introDone.set(true);
+					document.body.style.overflow = oldOverflow;
 				}, 4320)
 			);
 
@@ -215,13 +223,14 @@
 
 		return () => {
 			destroyed = true;
+			document.body.style.overflow = oldOverflow;
 			timers.forEach((timer) => clearTimeout(timer));
 		};
 	});
 </script>
 
 {#if mounted && !introGone}
-	<div class="intro-root pointer-events-none absolute inset-0 z-50 overflow-hidden">
+	<div class="intro-root pointer-events-none fixed inset-0 z-50 overflow-hidden">
 		<div class="intro-base absolute inset-0" class:base-leaving={baseLeaving}></div>
 
 		<!--
@@ -250,60 +259,60 @@
 					class:brand-hidden={panelLeaving}
 					aria-hidden="true"
 				>
-				<!-- BLOCCO LOGO TESTUALE -->
-				<div class="relative w-full overflow-hidden" class:logo-open={logoRevealed}>
-					<div class="overlay-logo absolute inset-y-0 left-0 h-full w-full"></div>
+					<!-- BLOCCO LOGO TESTUALE -->
+					<div class="relative w-full overflow-hidden" class:logo-open={logoRevealed}>
+						<div class="overlay-logo absolute inset-y-0 left-0 h-full w-full"></div>
 
-					<svg
-						class="block h-auto w-full"
-						viewBox="0 0 1101 300"
-						preserveAspectRatio="xMidYMid meet"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							class:letter-out={dOut}
-							d="M0 300V0H126.429C230.571 0 280.714 51 280.714 150C280.714 249 230.571 300 126.429 300H0ZM81.4286 227.143H126.429C174.429 227.143 197.143 201 197.143 149.571C197.143 99 174.429 72.8571 126.429 72.8571H81.4286V227.143Z"
-							fill="#FEFEFE"
-						/>
-						<path
-							class:letter-out={eOut}
-							d="M315.151 300V0H563.722V72.8571H396.579V113.571H546.579V186.429H396.579V227.143H568.008V300H315.151Z"
-							fill="#FEFEFE"
-						/>
-						<path
-							class:letter-out={lOut}
-							d="M602.26 300V0H683.689V227.143H846.546V300H602.26Z"
-							fill="#FEFEFE"
-						/>
-						<path
-							class:letter-out={vOut}
-							d="M1100.83 0L994.978 300H907.978L802.12 0H889.12L951.692 176.571L1013.83 0H1100.83Z"
-							fill="#FEFEFE"
-						/>
-					</svg>
-				</div>
+						<svg
+							class="block h-auto w-full"
+							viewBox="0 0 1101 300"
+							preserveAspectRatio="xMidYMid meet"
+							fill="none"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								class:letter-out={dOut}
+								d="M0 300V0H126.429C230.571 0 280.714 51 280.714 150C280.714 249 230.571 300 126.429 300H0ZM81.4286 227.143H126.429C174.429 227.143 197.143 201 197.143 149.571C197.143 99 174.429 72.8571 126.429 72.8571H81.4286V227.143Z"
+								fill="#FEFEFE"
+							/>
+							<path
+								class:letter-out={eOut}
+								d="M315.151 300V0H563.722V72.8571H396.579V113.571H546.579V186.429H396.579V227.143H568.008V300H315.151Z"
+								fill="#FEFEFE"
+							/>
+							<path
+								class:letter-out={lOut}
+								d="M602.26 300V0H683.689V227.143H846.546V300H602.26Z"
+								fill="#FEFEFE"
+							/>
+							<path
+								class:letter-out={vOut}
+								d="M1100.83 0L994.978 300H907.978L802.12 0H889.12L951.692 176.571L1013.83 0H1100.83Z"
+								fill="#FEFEFE"
+							/>
+						</svg>
+					</div>
 
-				<!-- BLOCCO FRECCIA / UP -->
-				<div class="relative w-full overflow-hidden" class:up-open={upRevealed}>
-					<div class="overlay-up absolute inset-y-0 right-0 h-full w-full"></div>
+					<!-- BLOCCO FRECCIA / UP -->
+					<div class="relative w-full overflow-hidden" class:up-open={upRevealed}>
+						<div class="overlay-up absolute inset-y-0 right-0 h-full w-full"></div>
 
-					<svg
-						class="block h-auto w-full"
-						viewBox="0 0 301 300"
-						fill="none"
-						preserveAspectRatio="xMidYMid meet"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<path
-							class:letter-out={arrowOut}
-							fill-rule="evenodd"
-							clip-rule="evenodd"
-							d="M301 300H211V166.431L112.457 300H0.613861L155.546 90H1V-6.10352e-05L301 0V90V300Z"
-							fill="#6455A5"
-						/>
-					</svg>
-				</div>
+						<svg
+							class="block h-auto w-full"
+							viewBox="0 0 301 300"
+							fill="none"
+							preserveAspectRatio="xMidYMid meet"
+							xmlns="http://www.w3.org/2000/svg"
+						>
+							<path
+								class:letter-out={arrowOut}
+								fill-rule="evenodd"
+								clip-rule="evenodd"
+								d="M301 300H211V166.431L112.457 300H0.613861L155.546 90H1V-6.10352e-05L301 0V90V300Z"
+								fill="#6455A5"
+							/>
+						</svg>
+					</div>
 				</div>
 			</Container>
 		</div>
@@ -321,7 +330,7 @@
 	}
 
 	.intro-base {
-		background: var(--color-surface);
+		background: var(--bg);
 		transform: translateX(0);
 		will-change: transform;
 		transition: transform 0.32s cubic-bezier(0.58, 0, 0.3, 1);
@@ -336,7 +345,7 @@
 		Stato iniziale: completamente fuori schermo a sinistra.
 	*/
 	.intro-panel {
-		background: var(--color-intro-panel);
+		background: #212121;
 		transform: translateX(-100%);
 		will-change: transform;
 
@@ -418,7 +427,7 @@
 		L'overlay si restringe fino a 0 e lascia vedere il logo.
 	*/
 	.overlay-logo {
-		background: var(--color-intro-panel);
+		background: #212121;
 		transition: width 0.9s ease;
 	}
 
@@ -431,7 +440,7 @@
 		Stesso principio, con durata leggermente diversa.
 	*/
 	.overlay-up {
-		background: var(--color-intro-panel);
+		background: #212121;
 		transition: width 0.7s ease;
 	}
 

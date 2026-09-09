@@ -192,25 +192,6 @@
 </script>
 
 <div class="scroll-blob" class:active={ready} bind:this={host} aria-hidden="true">
-	<svg class:hidden={ready} class="blob-fallback" viewBox="0 0 400 400" fill="none"
-		><defs
-			><linearGradient id="chrome" x1="80" y1="70" x2="290" y2="340" gradientUnits="userSpaceOnUse"
-				><stop stop-color="#f5f4fa" /><stop offset=".18" stop-color="#aaa7b5" /><stop
-					offset=".34"
-					stop-color="#24232b"
-				/><stop offset=".48" stop-color="#fafaff" /><stop offset=".57" stop-color="#777380" /><stop
-					offset=".75"
-					stop-color="#18171d"
-				/><stop offset=".9" stop-color="#e5e3ee" /><stop
-					offset="1"
-					stop-color="#85808e"
-				/></linearGradient
-			></defs
-		><path
-			fill="url(#chrome)"
-			d="M176 51C228 28 236 113 278 115C332 118 377 153 344 202C324 231 279 228 269 274C259 322 204 355 161 316C127 285 131 254 92 239C36 219 28 174 72 149C110 127 122 75 176 51Z"
-		/></svg
-	>
 	<canvas bind:this={canvas} class:hidden={!ready}></canvas>
 </div>
 
@@ -230,15 +211,6 @@
 	}
 	.scroll-blob.active {
 		position: fixed;
-	}
-	.blob-fallback {
-		position: absolute;
-		inset: 0;
-		width: 100%;
-		height: 100%;
-	}
-	.hidden {
-		display: none;
 	}
 	.scroll-blob canvas {
 		width: 100%;

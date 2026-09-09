@@ -1,8 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			(function () {
+				var mode = 'auto';
+				try {
+					mode = localStorage.getItem('delvup-theme') || 'auto';
+				} catch (_) {}
+				var h = new Date().getHours();
+				document.documentElement.dataset.theme =
+					mode === 'light' || mode === 'dark' ? mode : h >= 7 && h < 19 ? 'light' : 'dark';
+			})();
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover">

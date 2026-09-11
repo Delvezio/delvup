@@ -33,12 +33,13 @@ export function revealOnView(root: HTMLElement) {
 			const columns = [...root.querySelectorAll<HTMLElement>('.signal-column')];
 			element.style.setProperty(
 				'--reveal-delay',
-				`${Math.max(0, columns.indexOf(element)) * 85}ms`
+				`${Math.max(0, columns.indexOf(element)) * 125}ms`
 			);
 		}
 	});
 
 	let observer: IntersectionObserver | undefined;
+	let signalObserver: IntersectionObserver | undefined;
 	let introFinished = false;
 
 	function show(element: HTMLElement, delay = 0) {
@@ -47,10 +48,12 @@ export function revealOnView(root: HTMLElement) {
 		}
 		element.classList.remove('reveal-pending');
 		observer?.unobserve(element);
+		signalObserver?.unobserve(element);
 	}
 
 	function showAll() {
 		observer?.disconnect();
+		signalObserver?.disconnect();
 		elements.forEach((element) => show(element));
 	}
 
@@ -64,12 +67,25 @@ export function revealOnView(root: HTMLElement) {
 			},
 			{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
 		);
+		signalObserver = new IntersectionObserver(
+			(entries) => {
+				entries.filter((entry) => entry.isIntersecting).forEach((entry) => {
+					show(entry.target as HTMLElement);
+				});
+			},
+			{ threshold: 0.08, rootMargin: '0px 0px -32% 0px' }
+		);
 	}
 
 	const unsubscribe = introDone.subscribe((done) => {
 		if (!done || introFinished) return;
 		introFinished = true;
-		if (observer && !reducedMotion.matches) elements.forEach((element) => observer!.observe(element));
+		if (observer && signalObserver && !reducedMotion.matches) {
+			elements.forEach((element) => {
+				if (items.get(element) === 'signal') signalObserver!.observe(element);
+				else observer!.observe(element);
+			});
+		}
 		else showAll();
 	});
 
@@ -90,6 +106,7 @@ export function revealOnView(root: HTMLElement) {
 			unsubscribe();
 			root.removeEventListener('focusin', revealFocused);
 			observer?.disconnect();
+			signalObserver?.disconnect();
 			reducedMotion.removeEventListener('change', handleReducedMotion);
 			showAll();
 		}

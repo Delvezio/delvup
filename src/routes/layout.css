@@ -293,7 +293,7 @@ h1 .purple {
 	background: var(--line);
 	transform: scaleY(1);
 	transform-origin: top;
-	transition: transform 0.72s cubic-bezier(0.25, 0, 0, 1) var(--reveal-delay, 0ms);
+	transition: transform 0.95s cubic-bezier(0.25, 0, 0, 1) var(--reveal-delay, 0ms);
 }
 .signal-column.reveal-pending::after {
 	transform: scaleY(0);
@@ -316,8 +316,8 @@ h1 .purple {
 	display: block;
 	max-width: 245px;
 	transition:
-		opacity 0.42s ease calc(var(--reveal-delay, 0ms) + 170ms),
-		transform 0.56s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--reveal-delay, 0ms) + 170ms);
+		opacity 0.52s ease calc(var(--reveal-delay, 0ms) + 300ms),
+		transform 0.64s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--reveal-delay, 0ms) + 300ms);
 }
 .signal-column.reveal-pending .signal-copy {
 	opacity: 0;

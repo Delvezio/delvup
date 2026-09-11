@@ -107,9 +107,9 @@
 			 * 80 / 120 / 180 / 250
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					panelCovered = true;
-				}, 50)
+				}, 20)
 			);
 
 			/**
@@ -119,9 +119,9 @@
 			 * Se vuoi che il logo arrivi più tardi, aumenta questo valore.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					brandVisible = true;
-				}, 760)
+				}, 260)
 			);
 
 			/**
@@ -131,10 +131,10 @@
 			 * Insieme facciamo anche un primo spostamento orizzontale del brand.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					brandShifted = true;
 					logoRevealed = true;
-				}, 1260)
+				}, 420)
 			);
 
 			/**
@@ -144,10 +144,10 @@
 			 * alza questo valore.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					upRevealed = true;
 					brandCentered = true;
-				}, 2260)
+				}, 960)
 			);
 
 			/**
@@ -157,11 +157,11 @@
 			 * - più ravvicinato = più veloce / nervoso
 			 * - più distante = più elegante / leggibile
 			 */
-			timers.push(setTimeout(() => (dOut = true), 3000));
-			timers.push(setTimeout(() => (eOut = true), 3150));
-			timers.push(setTimeout(() => (lOut = true), 3250));
-			timers.push(setTimeout(() => (vOut = true), 3300));
-			timers.push(setTimeout(() => (arrowOut = true), 3330));
+			timers.push(setTimeout(() => (dOut = true), 1700));
+			timers.push(setTimeout(() => (eOut = true), 1765));
+			timers.push(setTimeout(() => (lOut = true), 1820));
+			timers.push(setTimeout(() => (vOut = true), 1860));
+			timers.push(setTimeout(() => (arrowOut = true), 1885));
 
 			/**
 			 * 6) USCITA DEL PANNELLO SCURO VERSO DESTRA
@@ -173,9 +173,9 @@
 			 * aumenta questo valore.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					panelLeaving = true;
-				}, 3600)
+				}, 1990)
 			);
 
 			/**
@@ -185,9 +185,9 @@
 			 * così i due layer risultano ben distinti.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					baseLeaving = true;
-				}, 4140)
+				}, 2380)
 			);
 
 			/**
@@ -200,10 +200,10 @@
 			 * all'uscita del pannello, modifica questo valore.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					introDone.set(true);
 					document.body.style.overflow = oldOverflow;
-				}, 4320)
+				}, 2480)
 			);
 
 			/**
@@ -213,9 +213,9 @@
 			 * eliminiamo il componente intro dal DOM.
 			 */
 			timers.push(
-				setTimeout(() => {
+			setTimeout(() => {
 					introGone = true;
-				}, 6200)
+				}, 3100)
 			);
 		}
 
@@ -333,7 +333,7 @@
 		background: var(--bg);
 		transform: translateX(0);
 		will-change: transform;
-		transition: transform 0.32s cubic-bezier(0.58, 0, 0.3, 1);
+		transition: transform 0.24s cubic-bezier(0.58, 0, 0.3, 1);
 	}
 
 	.base-leaving {
@@ -359,7 +359,7 @@
 			- più rapido: abbassa 0.72s
 			- più cinematografico: prova 0.9s / 1s
 		*/
-		transition: transform 0.72s cubic-bezier(0.5, 0, 0.24, 1);
+		transition: transform 0.52s cubic-bezier(0.5, 0, 0.24, 1);
 	}
 
 	/*
@@ -377,7 +377,7 @@
 	*/
 	.panel-leaving {
 		transform: translateX(100%);
-		transition-duration: 0.54s;
+		transition-duration: 0.38s;
 	}
 
 	/*
@@ -388,8 +388,8 @@
 		opacity: 0;
 		transform: translateX(-8vw);
 		transition:
-			transform 1.2s ease,
-			opacity 1.2s ease;
+			transform 0.68s ease,
+			opacity 0.58s ease;
 		will-change: transform, opacity;
 	}
 
@@ -420,6 +420,7 @@
 	*/
 	.brand-hidden {
 		opacity: 0;
+		transition-duration: 0.2s;
 	}
 
 	/*
@@ -428,7 +429,7 @@
 	*/
 	.overlay-logo {
 		background: #212121;
-		transition: width 0.9s ease;
+		transition: width 0.62s ease;
 	}
 
 	.logo-open .overlay-logo {
@@ -441,7 +442,7 @@
 	*/
 	.overlay-up {
 		background: #212121;
-		transition: width 0.7s ease;
+		transition: width 0.48s ease;
 	}
 
 	.up-open .overlay-up {
@@ -455,8 +456,8 @@
 	svg path {
 		transform-origin: center;
 		transition:
-			transform 0.3s ease-out,
-			opacity 0.3s ease-out;
+			transform 0.18s ease-out,
+			opacity 0.18s ease-out;
 	}
 
 	.letter-out {

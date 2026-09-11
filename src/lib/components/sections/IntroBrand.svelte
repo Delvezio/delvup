@@ -109,7 +109,7 @@
 			timers.push(
 			setTimeout(() => {
 					panelCovered = true;
-				}, 20)
+				}, 50)
 			);
 
 			/**
@@ -121,7 +121,7 @@
 			timers.push(
 			setTimeout(() => {
 					brandVisible = true;
-				}, 260)
+				}, 200)
 			);
 
 			/**
@@ -134,7 +134,7 @@
 			setTimeout(() => {
 					brandShifted = true;
 					logoRevealed = true;
-				}, 420)
+				}, 500)
 			);
 
 			/**
@@ -147,7 +147,7 @@
 			setTimeout(() => {
 					upRevealed = true;
 					brandCentered = true;
-				}, 960)
+				}, 1500)
 			);
 
 			/**
@@ -157,11 +157,11 @@
 			 * - più ravvicinato = più veloce / nervoso
 			 * - più distante = più elegante / leggibile
 			 */
-			timers.push(setTimeout(() => (dOut = true), 1700));
-			timers.push(setTimeout(() => (eOut = true), 1765));
-			timers.push(setTimeout(() => (lOut = true), 1820));
-			timers.push(setTimeout(() => (vOut = true), 1860));
-			timers.push(setTimeout(() => (arrowOut = true), 1885));
+			timers.push(setTimeout(() => (dOut = true), 2240));
+			timers.push(setTimeout(() => (eOut = true), 2390));
+			timers.push(setTimeout(() => (lOut = true), 2490));
+			timers.push(setTimeout(() => (vOut = true), 2540));
+			timers.push(setTimeout(() => (arrowOut = true), 2570));
 
 			/**
 			 * 6) USCITA DEL PANNELLO SCURO VERSO DESTRA
@@ -175,7 +175,7 @@
 			timers.push(
 			setTimeout(() => {
 					panelLeaving = true;
-				}, 1990)
+				}, 2840)
 			);
 
 			/**
@@ -187,7 +187,7 @@
 			timers.push(
 			setTimeout(() => {
 					baseLeaving = true;
-				}, 2380)
+				}, 3380)
 			);
 
 			/**
@@ -203,7 +203,7 @@
 			setTimeout(() => {
 					introDone.set(true);
 					document.body.style.overflow = oldOverflow;
-				}, 2480)
+				}, 3560)
 			);
 
 			/**
@@ -215,7 +215,7 @@
 			timers.push(
 			setTimeout(() => {
 					introGone = true;
-				}, 3100)
+				}, 5440)
 			);
 		}
 
@@ -333,7 +333,7 @@
 		background: var(--bg);
 		transform: translateX(0);
 		will-change: transform;
-		transition: transform 0.24s cubic-bezier(0.58, 0, 0.3, 1);
+		transition: transform 0.32s cubic-bezier(0.58, 0, 0.3, 1);
 	}
 
 	.base-leaving {
@@ -359,7 +359,7 @@
 			- più rapido: abbassa 0.72s
 			- più cinematografico: prova 0.9s / 1s
 		*/
-		transition: transform 0.52s cubic-bezier(0.5, 0, 0.24, 1);
+		transition: transform 0.72s cubic-bezier(0.5, 0, 0.24, 1);
 	}
 
 	/*
@@ -377,7 +377,7 @@
 	*/
 	.panel-leaving {
 		transform: translateX(100%);
-		transition-duration: 0.38s;
+		transition-duration: 0.54s;
 	}
 
 	/*
@@ -388,8 +388,8 @@
 		opacity: 0;
 		transform: translateX(-8vw);
 		transition:
-			transform 0.68s ease,
-			opacity 0.58s ease;
+			transform 1.2s ease,
+			opacity 1.2s ease;
 		will-change: transform, opacity;
 	}
 
@@ -420,7 +420,6 @@
 	*/
 	.brand-hidden {
 		opacity: 0;
-		transition-duration: 0.2s;
 	}
 
 	/*
@@ -429,7 +428,7 @@
 	*/
 	.overlay-logo {
 		background: #212121;
-		transition: width 0.62s ease;
+		transition: width 0.9s ease;
 	}
 
 	.logo-open .overlay-logo {
@@ -442,7 +441,7 @@
 	*/
 	.overlay-up {
 		background: #212121;
-		transition: width 0.48s ease;
+		transition: width 0.7s ease;
 	}
 
 	.up-open .overlay-up {
@@ -456,8 +455,8 @@
 	svg path {
 		transform-origin: center;
 		transition:
-			transform 0.18s ease-out,
-			opacity 0.18s ease-out;
+			transform 0.3s ease-out,
+			opacity 0.3s ease-out;
 	}
 
 	.letter-out {

@@ -1,0 +1,21 @@
+{
+	"name": "Delvup",
+	"short_name": "Delvup",
+	"description": "Siti web per professionisti e PMI, progettati e curati da Alessandro Delvezio.",
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#f4f1e8",
+	"theme_color": "#733fe0",
+	"icons": [
+		{
+			"src": "/favicon-192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/favicon-512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}

@@ -37,6 +37,8 @@
 			axis: 15
 		}
 	];
+	const siteDescription =
+		'Sono Alessandro Delvezio: progetto siti web chiari, veloci e curati nel tempo per professionisti e PMI. Scopri i lavori di Delvup.';
 	function moveSignalGif(event: PointerEvent) {
 		if (event.pointerType === 'touch') return;
 		const column = event.currentTarget as HTMLElement;
@@ -88,11 +90,54 @@
 </script>
 
 <svelte:head>
-	<title>Delvup — Design, sviluppo e cura del tuo sito web</title>
-	<meta
-		name="description"
-		content="Sono Alessandro Delvezio. Progetto siti web per professionisti e PMI: design, sviluppo e supporto nel tempo. Scopri i lavori di Delvup."
-	/>
+	<title>Delvup | Siti web per professionisti e PMI</title>
+	<meta name="description" content={siteDescription} />
+	<meta name="robots" content="index, follow, max-image-preview:large" />
+	<meta name="author" content="Alessandro Delvezio" />
+	<meta name="theme-color" content="#733fe0" />
+	<link rel="canonical" href="https://www.delvup.com/" />
+
+	<meta property="og:type" content="website" />
+	<meta property="og:locale" content="it_IT" />
+	<meta property="og:site_name" content="Delvup" />
+	<meta property="og:title" content="Delvup | Siti web per professionisti e PMI" />
+	<meta property="og:description" content={siteDescription} />
+	<meta property="og:url" content="https://www.delvup.com/" />
+	<meta property="og:image" content="https://www.delvup.com/og-image.png" />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:alt" content="Delvup — Progetto il tuo online" />
+
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Delvup | Siti web per professionisti e PMI" />
+	<meta name="twitter:description" content={siteDescription} />
+	<meta name="twitter:image" content="https://www.delvup.com/og-image.png" />
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "ProfessionalService",
+			"name": "Delvup",
+			"url": "https://www.delvup.com/",
+			"logo": "https://www.delvup.com/favicon-192.png",
+			"image": "https://www.delvup.com/og-image.png",
+			"email": "ciao@delvup.com",
+			"description": "Sono Alessandro Delvezio: progetto siti web chiari, veloci e curati nel tempo per professionisti e PMI. Scopri i lavori di Delvup.",
+			"founder": {
+				"@type": "Person",
+				"name": "Alessandro Delvezio"
+			},
+			"areaServed": {
+				"@type": "Country",
+				"name": "Italia"
+			},
+			"serviceType": [
+				"Web design",
+				"Sviluppo siti web",
+				"Manutenzione e supporto web"
+			]
+		}
+	</script>
 </svelte:head>
 <IntroBrand />
 <div use:revealOnView inert={mounted && !$introDone}>

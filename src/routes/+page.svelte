@@ -15,24 +15,43 @@
 		{
 			letter: 'A',
 			text: 'Pensavi: bastano i social, il sito non serve.',
-			gif: '/gifs/boris-proda.gif'
+			gif: '/gifs/boris-proda.gif',
+			axis: -15
 		},
 		{
 			letter: 'B',
 			text: 'Brand confuso, ma sito già online.',
-			gif: '/gifs/cosi-de-botto.gif'
+			gif: '/gifs/cosi-de-botto.gif',
+			axis: -6
 		},
 		{
 			letter: 'C',
 			text: 'Homepage romanzo, zero comunicazione.',
-			gif: '/gifs/boris-monnezza.gif'
+			gif: '/gifs/boris-monnezza.gif',
+			axis: 5
 		},
 		{
 			letter: 'D',
 			text: 'Quando hai aggiornato l’ultima volta?',
-			gif: '/gifs/boris-like.gif'
+			gif: '/gifs/boris-like.gif',
+			axis: 15
 		}
 	];
+	function moveSignalGif(event: PointerEvent) {
+		if (event.pointerType === 'touch') return;
+		const column = event.currentTarget as HTMLElement;
+		const rect = column.getBoundingClientRect();
+		const progress = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width) * 2 - 1));
+		const angle = Number(column.dataset.axis || 0) * (Math.PI / 180);
+		const distance = progress * Math.min(68, rect.width * 0.22);
+		column.style.setProperty('--gif-shift-x', `${Math.cos(angle) * distance}px`);
+		column.style.setProperty('--gif-shift-y', `${Math.sin(angle) * distance}px`);
+	}
+	function resetSignalGif(event: PointerEvent) {
+		const column = event.currentTarget as HTMLElement;
+		column.style.setProperty('--gif-shift-x', '0px');
+		column.style.setProperty('--gif-shift-y', '0px');
+	}
 	function applyTheme(value: string) {
 		mode = value;
 		const hour = new Date().getHours();
@@ -143,8 +162,12 @@
 						type="button"
 						class:signal-active={activeSignal === signal.letter}
 						class="signal-column"
+						data-axis={signal.axis}
+						style={`--axis-angle: ${signal.axis}deg`}
 						aria-pressed={activeSignal === signal.letter}
 						aria-label={`${signal.text} Mostra l’animazione.`}
+						onpointermove={moveSignalGif}
+						onpointerleave={resetSignalGif}
 						onclick={() =>
 							(activeSignal = activeSignal === signal.letter ? null : signal.letter)}
 					>
@@ -152,7 +175,12 @@
 							<img src={signal.gif} alt="" width="498" height="295" loading="lazy" />
 						</span>
 						<span class="signal-copy">
-							<span class="signal-marker">{signal.letter}</span>
+							<span class="signal-marker">
+								<svg class="signal-timer" viewBox="0 0 36 36" aria-hidden="true">
+									<circle cx="18" cy="18" r="16" pathLength="100"></circle>
+								</svg>
+								<span>{signal.letter}</span>
+							</span>
 							<span class="signal-text">{signal.text}</span>
 						</span>
 					</button>

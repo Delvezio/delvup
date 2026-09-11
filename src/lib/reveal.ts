@@ -1,61 +1,87 @@
 import { introDone } from '$lib/stores/intro';
 
-/** Reveal groups once, preserving the project cards' independent rotations. */
+type RevealDirection = 'top' | 'bottom' | 'title';
+
+/** Recreates the original Delvup direction, timing and title rotation. */
 export function revealOnView(root: HTMLElement) {
-	const media = matchMedia('(prefers-reduced-motion: reduce)');
-	const elements = Array.from(
-		root.querySelectorAll<HTMLElement>(
-			'.brand, nav a, .theme-switch, .hero-topline, h1, .hero-arrow, .hero-bottom > *, .hero-rule, .section-heading .eyebrow, .section-heading h2, .section-heading > p, .project, .approach-label > *, .approach-copy h2, .about-copy p, .service > *, .contact > .eyebrow, .contact h2, .contact-bottom > *, .site-footer > *'
-		)
+	const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+	const items = new Map<HTMLElement, RevealDirection>();
+
+	function collect(selector: string, direction: RevealDirection) {
+		root.querySelectorAll<HTMLElement>(selector).forEach((element) => {
+			if (!items.has(element)) items.set(element, direction);
+		});
+	}
+
+	collect('.brand, .site-header nav a, .theme-switch, .hero-topline > span', 'top');
+	collect('.title-line', 'title');
+	collect(
+		'.hero-arrow, .hero-bottom > *, .hero-rule > span, .section-heading .eyebrow, .section-heading > p, .project, .approach-label > *, .about-copy p, .service > :not(.reveal-title), .contact > .eyebrow, .contact-bottom > *, .site-footer > *',
+		'bottom'
 	);
-	elements.forEach((el) => el.classList.add('reveal-item'));
+
+	const elements = [...items.keys()];
+	elements.forEach((element) => {
+		const direction = items.get(element)!;
+		element.classList.add('reveal-item', `reveal-from-${direction}`, 'reveal-pending');
+		if (direction === 'title') {
+			const title = element.closest('.reveal-title, h1');
+			const lines = title ? [...title.querySelectorAll<HTMLElement>('.title-line')] : [];
+			element.style.setProperty('--reveal-delay', `${Math.max(0, lines.indexOf(element)) * 140}ms`);
+		}
+	});
+
 	let observer: IntersectionObserver | undefined;
-	let finished = false;
+	let introFinished = false;
+
+	function show(element: HTMLElement, delay = 0) {
+		if (items.get(element) !== 'title') element.style.setProperty('--reveal-delay', `${delay}ms`);
+		element.classList.remove('reveal-pending');
+		observer?.unobserve(element);
+	}
+
 	function showAll() {
 		observer?.disconnect();
-		elements.forEach((el) => el.classList.remove('reveal-pending'));
+		elements.forEach((element) => show(element));
 	}
-	if (!media.matches && 'IntersectionObserver' in window) {
-		elements.forEach((el) => el.classList.add('reveal-pending'));
+
+	if (!reducedMotion.matches && 'IntersectionObserver' in window) {
 		observer = new IntersectionObserver(
 			(entries) => {
 				entries
 					.filter((entry) => entry.isIntersecting)
-					.forEach((entry, index) => {
-						const el = entry.target as HTMLElement;
-						el.style.setProperty('--reveal-delay', `${Math.min(index, 4) * 75}ms`);
-						el.classList.remove('reveal-pending');
-						observer?.unobserve(el);
-					});
+					.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)
+					.forEach((entry, index) => show(entry.target as HTMLElement, Math.min(index, 4) * 80));
 			},
-			{ threshold: 0.08, rootMargin: '0px 0px -24px 0px' }
+			{ threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
 		);
 	}
+
 	const unsubscribe = introDone.subscribe((done) => {
-		if (!done || finished) return;
-		finished = true;
-		if (observer && !media.matches) elements.forEach((el) => observer!.observe(el));
+		if (!done || introFinished) return;
+		introFinished = true;
+		if (observer && !reducedMotion.matches) elements.forEach((element) => observer!.observe(element));
 		else showAll();
 	});
-	const reduceMotion = () => {
-		if (media.matches) showAll();
+
+	const handleReducedMotion = () => {
+		if (reducedMotion.matches) showAll();
 	};
-	media.addEventListener('change', reduceMotion);
 	const revealFocused = (event: FocusEvent) => {
 		if (!(event.target instanceof HTMLElement)) return;
 		const item = event.target.closest<HTMLElement>('.reveal-item');
-		if (item) {
-			item.classList.remove('reveal-pending');
-			observer?.unobserve(item);
-		}
+		if (item) show(item);
 	};
+
+	reducedMotion.addEventListener('change', handleReducedMotion);
 	root.addEventListener('focusin', revealFocused);
+
 	return {
 		destroy() {
 			unsubscribe();
 			root.removeEventListener('focusin', revealFocused);
 			observer?.disconnect();
-			media.removeEventListener('change', reduceMotion);
+			reducedMotion.removeEventListener('change', handleReducedMotion);
 			showAll();
 		}
 	};

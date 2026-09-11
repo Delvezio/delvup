@@ -91,7 +91,10 @@
 				<span>DESIGN / DEV & CARE</span><span>INDIPENDENTE, PER SCELTA.</span>
 			</div>
 			<div class="hero-title-wrap">
-				<h1 id="hero-title">Progetto<br />il tuo <span>online.</span></h1>
+				<h1 id="hero-title">
+					<span class="title-line-mask"><span class="title-line">Progetto</span></span>
+					<span class="title-line-mask"><span class="title-line">il tuo <span class="purple">online.</span></span></span>
+				</h1>
 				<span class="hero-arrow" aria-hidden="true">↗</span>
 			</div>
 			<div class="hero-bottom">
@@ -108,7 +111,9 @@
 			<div class="section-heading">
 				<div>
 					<span class="eyebrow">01 / SELEZIONE</span>
-					<h2 id="work-title">Fatti, poi online<span class="purple">.</span></h2>
+					<h2 id="work-title" class="reveal-title">
+						<span class="title-line-mask"><span class="title-line">Fatti, poi online<span class="purple">.</span></span></span>
+					</h2>
 				</div>
 				<p>Tre realtà diverse.<br />Un progetto su misura, ogni volta.</p>
 			</div>
@@ -130,7 +135,10 @@
 					</div>
 					<div class="project-info">
 						<div>
-							<h3>Farmacia<br />San Michele</h3>
+							<h3 class="reveal-title">
+								<span class="title-line-mask"><span class="title-line">Farmacia</span></span>
+								<span class="title-line-mask"><span class="title-line">San Michele</span></span>
+							</h3>
 							<p>Salute e servizi, a portata di click.</p>
 						</div>
 						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
@@ -156,7 +164,10 @@
 					</div>
 					<div class="project-info">
 						<div>
-							<h3>Giulia<br />Forcignano</h3>
+							<h3 class="reveal-title">
+								<span class="title-line-mask"><span class="title-line">Giulia</span></span>
+								<span class="title-line-mask"><span class="title-line">Forcignano</span></span>
+							</h3>
 							<p>Uno spazio per iniziare un percorso.</p>
 						</div>
 						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
@@ -182,7 +193,10 @@
 					</div>
 					<div class="project-info">
 						<div>
-							<h3>De Martiis<br />Catalano</h3>
+							<h3 class="reveal-title">
+								<span class="title-line-mask"><span class="title-line">De Martiis</span></span>
+								<span class="title-line-mask"><span class="title-line">Catalano</span></span>
+							</h3>
 							<p>Identità e presenza, anche sul web.</p>
 						</div>
 						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
@@ -201,9 +215,10 @@
 				>
 			</div>
 			<div class="approach-copy">
-				<h2 id="approach-title">
-					Non sono il tuo fornitore.<br />Sono un <span class="purple">partner,</span><br />un
-					riferimento stabile.
+				<h2 id="approach-title" class="reveal-title">
+					<span class="title-line-mask"><span class="title-line">Non sono il tuo fornitore.</span></span>
+					<span class="title-line-mask"><span class="title-line">Sono un <span class="purple">partner,</span></span></span>
+					<span class="title-line-mask"><span class="title-line">un riferimento stabile.</span></span>
 				</h2>
 				<div class="about-copy">
 					<p>
@@ -221,7 +236,7 @@
 			{#each [{ n: '01', title: 'Design.', subtitle: 'Dare forma alle idee.', text: 'Identità visiva e interfacce che parlano di te. Ogni scelta parte dalle persone che vuoi raggiungere.' }, { n: '02', title: 'Develop.', subtitle: 'Farle funzionare.', text: 'Siti chiari, veloci e adatti a ogni schermo. Un’esperienza semplice, dal primo accesso al contatto.' }, { n: '03', title: 'Care.', subtitle: 'Esserci, anche dopo.', text: 'Supporto, aggiornamenti e attenzione nel tempo. Il tuo sito cresce insieme alla tua attività.' }] as service (service.n)}
 				<div class="service">
 					<span class="service-number">{service.n}</span>
-					<h3>{service.title}</h3>
+					<h3 class="reveal-title"><span class="title-line-mask"><span class="title-line">{service.title}</span></span></h3>
 					<div>
 						<h4>{service.subtitle}</h4>
 						<p>{service.text}</p>
@@ -232,10 +247,10 @@
 		</section>
 		<section id="contatti" class="contact wrap" aria-labelledby="contact-title">
 			<span class="eyebrow">03 / IL PROSSIMO PROGETTO</span>
-			<h2 id="contact-title">
-				Hai un progetto<br />in mente?<br /><a href="mailto:ciao@delvup.com"
-					>Parliamone<span aria-hidden="true">↗</span></a
-				>
+			<h2 id="contact-title" class="reveal-title">
+				<span class="title-line-mask"><span class="title-line">Hai un progetto</span></span>
+				<span class="title-line-mask"><span class="title-line">in mente?</span></span>
+				<span class="title-line-mask"><span class="title-line"><a href="mailto:ciao@delvup.com">Parliamone<span aria-hidden="true">↗</span></a></span></span>
 			</h2>
 			<div class="contact-bottom">
 				<a href="mailto:ciao@delvup.com">ciao@delvup.com ↗</a>

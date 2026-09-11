@@ -185,7 +185,7 @@ h1 {
 	font-weight: 700;
 	margin: 0;
 }
-h1 > span {
+h1 .purple {
 	color: var(--accent);
 }
 .hero-arrow {
@@ -759,20 +759,61 @@ h1 > span {
 	}
 }
 
-/* Individual translate leaves existing card transforms and hover states intact. */
-.reveal-item {
+/* Motion language restored from the original Delvup splash page. */
+.reveal-item:not(.reveal-from-title) {
 	transition:
-		opacity 0.8s ease var(--reveal-delay, 0ms),
-		translate 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
+		opacity 0.85s ease var(--reveal-delay, 0ms),
+		translate 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),
 		transform 0.35s ease;
 }
-.reveal-pending {
+.reveal-from-top.reveal-pending {
 	opacity: 0;
-	translate: 0 28px;
+	translate: 0 -28px;
+}
+.reveal-from-bottom.reveal-pending {
+	opacity: 0;
+	translate: 0 32px;
+}
+.title-line-mask {
+	display: block;
+	overflow: hidden;
+	perspective: 1200px;
+	padding-top: 0.08em;
+	padding-bottom: 0.24em;
+	margin-top: -0.08em;
+	margin-bottom: -0.24em;
+}
+.title-line {
+	display: block;
+	transform-origin: top;
+	backface-visibility: hidden;
+	will-change: transform, opacity;
+}
+.title-line.reveal-pending {
+	opacity: 0;
+	transform: translate3d(0, 95%, 0) rotateX(-80deg);
+}
+.title-line.reveal-item:not(.reveal-pending) {
+	animation: delvup-line-reveal 1.2s cubic-bezier(0.25, 0, 0, 1) both;
+	animation-delay: var(--reveal-delay, 0ms);
+}
+@keyframes delvup-line-reveal {
+	0% {
+		opacity: 0;
+		transform: translate3d(0, 95%, 0) rotateX(-80deg);
+	}
+	100% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0) rotateX(0deg);
+	}
 }
 @media (prefers-reduced-motion: reduce) {
 	.reveal-pending {
 		opacity: 1;
 		translate: none;
+		transform: none;
+	}
+	.title-line.reveal-item {
+		animation: none;
 	}
 }

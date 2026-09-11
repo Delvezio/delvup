@@ -141,15 +141,22 @@
 			</div>
 			<div class="hero-bottom">
 				<p>Siti essenziali per professionisti e PMI.<br />Chiari, veloci, mantenuti nel tempo.</p>
-				<a class="round-link" href="#lavori"
-					><span>Esplora i lavori</span><span class="round-icon" aria-hidden="true">↓</span></a
+				<a class="round-link" href="#per-te"
+					><span>Ti posso aiutare se</span><span class="round-icon" aria-hidden="true">
+						<svg class="round-timer" viewBox="0 0 64 64">
+							<circle cx="32" cy="32" r="29" pathLength="100"></circle>
+						</svg>
+						<svg class="round-arrow" viewBox="0 0 24 24">
+							<path d="M12 4v15M6.5 13.5 12 19l5.5-5.5"></path>
+						</svg></span
+					></a
 				>
 			</div>
 			<div class="hero-rule">
 				<span>DAL PRIMO PIXEL. AL GIORNO DOPO.</span><span>SCROLL PER SCOPRIRE ↓</span>
 			</div>
 		</section>
-		<section class="signals-section wrap" aria-labelledby="signals-title">
+		<section id="per-te" class="signals-section wrap" aria-labelledby="signals-title">
 			<div class="signals-heading">
 				<h2 id="signals-title" class="reveal-title">
 					<span class="title-line-mask"><span class="title-line">Sono qui per te se</span></span>

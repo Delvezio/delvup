@@ -221,18 +221,46 @@ h1 .purple {
 	font-size: 14px;
 }
 .round-icon {
+	position: relative;
 	width: 58px;
 	height: 58px;
 	display: grid;
 	place-items: center;
 	border: 1px solid var(--line);
 	border-radius: 50%;
-	font-size: 25px;
-	transition: background 0.2s;
 }
-.round-link:hover .round-icon {
-	background: var(--accent);
-	color: white;
+.round-timer {
+	position: absolute;
+	inset: -4px;
+	width: calc(100% + 8px);
+	height: calc(100% + 8px);
+	transform: rotate(-90deg);
+	overflow: visible;
+}
+.round-timer circle {
+	fill: none;
+	stroke: var(--accent);
+	stroke-width: 2.4;
+	stroke-linecap: round;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+	transition: stroke-dashoffset 1.25s linear;
+}
+.round-arrow {
+	width: 25px;
+	height: 25px;
+	overflow: visible;
+}
+.round-arrow path {
+	fill: none;
+	stroke: currentColor;
+	stroke-width: 1.5;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+.round-link:hover .round-timer circle,
+.round-link:focus-visible .round-timer circle {
+	stroke-dashoffset: 0;
 }
 .hero-rule {
 	border-top: 1px solid var(--line);

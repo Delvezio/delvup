@@ -614,7 +614,7 @@ h1 > span {
 		right: 0;
 	}
 	.hero-bottom {
-		margin-top: 160px;
+		margin-top: 48px;
 		align-items: start;
 		margin-bottom: 38px;
 		flex-direction: column;
@@ -760,24 +760,7 @@ h1 > span {
 }
 
 /* Individual translate leaves existing card transforms and hover states intact. */
-.brand,
-nav a,
-.theme-switch,
-.hero-topline,
-h1,
-.hero-arrow,
-.hero-bottom > *,
-.hero-rule,
-.section-heading,
-.project,
-.approach-label,
-.approach-copy h2,
-.about-copy p,
-.service,
-.contact > .eyebrow,
-.contact h2,
-.contact-bottom > *,
-.site-footer > * {
+.reveal-item {
 	transition:
 		opacity 0.8s ease var(--reveal-delay, 0ms),
 		translate 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms),

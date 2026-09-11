@@ -5,9 +5,10 @@ export function revealOnView(root: HTMLElement) {
 	const media = matchMedia('(prefers-reduced-motion: reduce)');
 	const elements = Array.from(
 		root.querySelectorAll<HTMLElement>(
-			'.brand, nav a, .theme-switch, .hero-topline, h1, .hero-arrow, .hero-bottom > *, .hero-rule, .section-heading, .project, .approach-label, .approach-copy h2, .about-copy p, .service, .contact > .eyebrow, .contact h2, .contact-bottom > *, .site-footer > *'
+			'.brand, nav a, .theme-switch, .hero-topline, h1, .hero-arrow, .hero-bottom > *, .hero-rule, .section-heading .eyebrow, .section-heading h2, .section-heading > p, .project, .approach-label > *, .approach-copy h2, .about-copy p, .service > *, .contact > .eyebrow, .contact h2, .contact-bottom > *, .site-footer > *'
 		)
 	);
+	elements.forEach((el) => el.classList.add('reveal-item'));
 	let observer: IntersectionObserver | undefined;
 	let finished = false;
 	function showAll() {
@@ -40,9 +41,19 @@ export function revealOnView(root: HTMLElement) {
 		if (media.matches) showAll();
 	};
 	media.addEventListener('change', reduceMotion);
+	const revealFocused = (event: FocusEvent) => {
+		if (!(event.target instanceof HTMLElement)) return;
+		const item = event.target.closest<HTMLElement>('.reveal-item');
+		if (item) {
+			item.classList.remove('reveal-pending');
+			observer?.unobserve(item);
+		}
+	};
+	root.addEventListener('focusin', revealFocused);
 	return {
 		destroy() {
 			unsubscribe();
+			root.removeEventListener('focusin', revealFocused);
 			observer?.disconnect();
 			media.removeEventListener('change', reduceMotion);
 			showAll();

@@ -4,7 +4,6 @@
 	import { introDone } from '$lib/stores/intro';
 	import { revealOnView } from '$lib/reveal';
 	let mounted = $state(false);
-	import ScrollBlob from '$lib/components/visual/ScrollBlob.svelte';
 	let mode = $state('auto');
 	const modes = [
 		{ value: 'light', label: 'Chiaro', icon: '☼' },
@@ -85,7 +84,7 @@
 				>{/each}
 		</div>
 	</header>
-	<ScrollBlob />
+	<!-- Blob 3D in bozza: componente conservato in lib/components/visual. -->
 	<main id="contenuto">
 		<section class="hero wrap" aria-labelledby="hero-title">
 			<div class="hero-topline">

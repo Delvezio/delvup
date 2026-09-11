@@ -350,7 +350,7 @@ h1 .purple {
 .signal-gif {
 	position: absolute;
 	z-index: 3;
-	top: 145px;
+	top: 205px;
 	left: 50%;
 	display: block;
 	width: min(78%, 238px);
@@ -368,7 +368,7 @@ h1 .purple {
 		transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .signal-column:nth-child(2) .signal-gif {
-	top: 178px;
+	top: 105px;
 }
 .signal-column:nth-child(3) .signal-gif {
 	top: 105px;

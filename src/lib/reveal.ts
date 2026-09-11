@@ -16,7 +16,7 @@ export function revealOnView(root: HTMLElement) {
 	collect('.brand, .site-header nav a, .theme-switch, .hero-topline > span', 'top');
 	collect('.title-line', 'title');
 	collect(
-		'.hero-arrow, .hero-bottom > *, .hero-rule > span, .section-heading .eyebrow, .section-heading > p, .project, .approach-label > *, .about-copy p, .service > :not(.reveal-title), .contact > .eyebrow, .contact-bottom > *, .site-footer > *',
+		'.hero-arrow, .hero-bottom > *, .hero-rule > span, .signals-heading .signal-arrow, .signal-column, .section-heading .eyebrow, .section-heading > p, .project, .approach-label > *, .about-copy p, .service > :not(.reveal-title), .contact > .eyebrow, .contact-bottom > *, .site-footer > *',
 		'bottom'
 	);
 

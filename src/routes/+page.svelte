@@ -5,10 +5,33 @@
 	import { revealOnView } from '$lib/reveal';
 	let mounted = $state(false);
 	let mode = $state('auto');
+	let activeSignal = $state<string | null>(null);
 	const modes = [
 		{ value: 'light', label: 'Chiaro', icon: '☼' },
 		{ value: 'dark', label: 'Scuro', icon: '☾' },
 		{ value: 'auto', label: 'Auto', icon: '◐' }
+	];
+	const signals = [
+		{
+			letter: 'A',
+			text: 'Pensavi: bastano i social, il sito non serve.',
+			gif: '/gifs/boris-proda.gif'
+		},
+		{
+			letter: 'B',
+			text: 'Brand confuso, ma sito già online.',
+			gif: '/gifs/cosi-de-botto.gif'
+		},
+		{
+			letter: 'C',
+			text: 'Homepage romanzo, zero comunicazione.',
+			gif: '/gifs/boris-monnezza.gif'
+		},
+		{
+			letter: 'D',
+			text: 'Quando hai aggiornato l’ultima volta?',
+			gif: '/gifs/boris-like.gif'
+		}
 	];
 	function applyTheme(value: string) {
 		mode = value;
@@ -105,6 +128,35 @@
 			</div>
 			<div class="hero-rule">
 				<span>DAL PRIMO PIXEL. AL GIORNO DOPO.</span><span>SCROLL PER SCOPRIRE ↓</span>
+			</div>
+		</section>
+		<section class="signals-section wrap" aria-labelledby="signals-title">
+			<div class="signals-heading">
+				<h2 id="signals-title" class="reveal-title">
+					<span class="title-line-mask"><span class="title-line">Sono qui per te se</span></span>
+				</h2>
+				<span class="signal-arrow" aria-hidden="true">↓</span>
+			</div>
+			<div class="signals-grid">
+				{#each signals as signal (signal.letter)}
+					<button
+						type="button"
+						class:signal-active={activeSignal === signal.letter}
+						class="signal-column"
+						aria-pressed={activeSignal === signal.letter}
+						aria-label={`${signal.text} Mostra l’animazione.`}
+						onclick={() =>
+							(activeSignal = activeSignal === signal.letter ? null : signal.letter)}
+					>
+						<span class="signal-gif" aria-hidden="true">
+							<img src={signal.gif} alt="" width="498" height="295" loading="lazy" />
+						</span>
+						<span class="signal-copy">
+							<span class="signal-marker">{signal.letter}</span>
+							<span class="signal-text">{signal.text}</span>
+						</span>
+					</button>
+				{/each}
 			</div>
 		</section>
 		<section id="lavori" class="work-section wrap" aria-labelledby="work-title">

@@ -238,6 +238,170 @@ h1 .purple {
 	border-top: 1px solid var(--line);
 	padding-top: 17px;
 }
+.signals-section {
+	padding-top: 122px;
+	position: relative;
+	z-index: 2;
+}
+.signals-heading {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+	margin-bottom: 38px;
+}
+.signals-heading h2 {
+	font-size: clamp(28px, 3vw, 45px);
+	line-height: 1;
+	letter-spacing: -0.045em;
+	font-weight: 700;
+	margin: 0;
+}
+.signal-arrow {
+	font-size: clamp(42px, 5vw, 72px);
+	line-height: 0.7;
+	font-weight: 400;
+}
+.signals-grid {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	min-height: 620px;
+	border-top: 1px solid var(--line);
+	border-bottom: 1px solid var(--line);
+}
+.signal-column {
+	position: relative;
+	min-width: 0;
+	padding: 0 24px 34px;
+	border: 0;
+	border-left: 1px solid var(--line);
+	background: transparent;
+	color: var(--text);
+	text-align: left;
+	cursor: pointer;
+	overflow: hidden;
+}
+.signal-column:last-child {
+	border-right: 1px solid var(--line);
+}
+.signal-column::before {
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: color-mix(in srgb, var(--accent) 7%, transparent);
+	opacity: 0;
+	transition: opacity 0.35s ease;
+}
+.signal-column:hover::before,
+.signal-column:focus-visible::before,
+.signal-column.signal-active::before {
+	opacity: 1;
+}
+.signal-copy {
+	position: relative;
+	z-index: 2;
+	display: block;
+	max-width: 245px;
+}
+.signal-column:nth-child(1) .signal-copy {
+	margin-top: 318px;
+}
+.signal-column:nth-child(2) .signal-copy {
+	margin-top: 440px;
+}
+.signal-column:nth-child(3) .signal-copy {
+	margin-top: 232px;
+}
+.signal-column:nth-child(4) .signal-copy {
+	margin-top: 392px;
+}
+.signal-marker {
+	display: grid;
+	place-items: center;
+	width: 31px;
+	height: 31px;
+	margin-bottom: 14px;
+	border: 1px solid var(--line);
+	border-radius: 50%;
+	background: var(--bg);
+	font-size: 12px;
+	font-weight: 700;
+	transition:
+		background 0.25s ease,
+		color 0.25s ease,
+		border-color 0.25s ease;
+}
+.signal-text {
+	display: block;
+	font-size: clamp(20px, 1.75vw, 27px);
+	line-height: 1.08;
+	letter-spacing: -0.035em;
+	font-weight: 700;
+}
+.signal-column:hover .signal-marker,
+.signal-column:focus-visible .signal-marker,
+.signal-column.signal-active .signal-marker {
+	border-color: var(--accent);
+	background: var(--accent);
+	color: white;
+}
+.signal-gif {
+	position: absolute;
+	z-index: 3;
+	top: 70px;
+	left: 50%;
+	display: block;
+	width: min(78%, 238px);
+	aspect-ratio: 16 / 10;
+	border-radius: 15px;
+	overflow: hidden;
+	box-shadow: 0 18px 42px #0000002e;
+	opacity: 0;
+	transform: translate(-50%, 24px) rotate(-7deg) scale(0.84);
+	transform-origin: center;
+	pointer-events: none;
+	transition:
+		opacity 0.28s ease,
+		transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.signal-column:nth-child(2) .signal-gif {
+	top: 122px;
+	transform: translate(-50%, 24px) rotate(5deg) scale(0.84);
+}
+.signal-column:nth-child(3) .signal-gif {
+	top: 330px;
+	transform: translate(-50%, 24px) rotate(-4deg) scale(0.84);
+}
+.signal-column:nth-child(4) .signal-gif {
+	top: 96px;
+	transform: translate(-50%, 24px) rotate(7deg) scale(0.84);
+}
+.signal-gif img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.signal-column:hover .signal-gif,
+.signal-column:focus-visible .signal-gif,
+.signal-column.signal-active .signal-gif {
+	opacity: 1;
+	transform: translate(-50%, 0) rotate(-7deg) scale(1);
+}
+.signal-column:nth-child(2):hover .signal-gif,
+.signal-column:nth-child(2):focus-visible .signal-gif,
+.signal-column:nth-child(2).signal-active .signal-gif {
+	transform: translate(-50%, 0) rotate(5deg) scale(1);
+}
+.signal-column:nth-child(3):hover .signal-gif,
+.signal-column:nth-child(3):focus-visible .signal-gif,
+.signal-column:nth-child(3).signal-active .signal-gif {
+	transform: translate(-50%, 0) rotate(-4deg) scale(1);
+}
+.signal-column:nth-child(4):hover .signal-gif,
+.signal-column:nth-child(4):focus-visible .signal-gif,
+.signal-column:nth-child(4).signal-active .signal-gif {
+	transform: translate(-50%, 0) rotate(7deg) scale(1);
+}
 .work-section {
 	padding-top: 125px;
 	padding-bottom: 135px;
@@ -559,6 +723,23 @@ h1 .purple {
 	.project-domain {
 		font-size: 9px;
 	}
+	.signals-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		min-height: 780px;
+	}
+	.signal-column:nth-child(2) {
+		border-right: 1px solid var(--line);
+	}
+	.signal-column:nth-child(n + 3) {
+		border-top: 1px solid var(--line);
+	}
+	.signal-column:nth-child(3) .signal-copy,
+	.signal-column:nth-child(4) .signal-copy {
+		margin-top: 260px;
+	}
+	.signal-column:nth-child(3) .signal-gif {
+		top: 50px;
+	}
 	.approach {
 		grid-template-columns: 1fr 2.5fr;
 	}
@@ -631,6 +812,68 @@ h1 .purple {
 	.hero-rule {
 		font-size: 8px;
 		gap: 15px;
+	}
+	.signals-section {
+		padding-top: 75px;
+	}
+	.signals-heading {
+		margin-bottom: 28px;
+		gap: 14px;
+	}
+	.signals-heading h2 {
+		font-size: 31px;
+	}
+	.signal-arrow {
+		font-size: 44px;
+	}
+	.signals-grid {
+		grid-template-columns: 1fr;
+		min-height: 0;
+	}
+	.signal-column,
+	.signal-column:nth-child(2) {
+		min-height: 285px;
+		padding: 26px 22px;
+		border-top: 1px solid var(--line);
+		border-right: 1px solid var(--line);
+	}
+	.signal-column:first-child {
+		border-top: 0;
+	}
+	.signal-column .signal-copy,
+	.signal-column:nth-child(1) .signal-copy,
+	.signal-column:nth-child(2) .signal-copy,
+	.signal-column:nth-child(3) .signal-copy,
+	.signal-column:nth-child(4) .signal-copy {
+		margin-top: 146px;
+		max-width: 70%;
+	}
+	.signal-text {
+		font-size: 22px;
+	}
+	.signal-gif,
+	.signal-column:nth-child(2) .signal-gif,
+	.signal-column:nth-child(3) .signal-gif,
+	.signal-column:nth-child(4) .signal-gif {
+		top: 24px;
+		left: auto;
+		right: 20px;
+		width: min(52%, 205px);
+		transform: translate(0, 18px) rotate(-4deg) scale(0.88);
+	}
+	.signal-column:hover .signal-gif,
+	.signal-column:focus-visible .signal-gif,
+	.signal-column.signal-active .signal-gif,
+	.signal-column:nth-child(2):hover .signal-gif,
+	.signal-column:nth-child(2):focus-visible .signal-gif,
+	.signal-column:nth-child(2).signal-active .signal-gif,
+	.signal-column:nth-child(3):hover .signal-gif,
+	.signal-column:nth-child(3):focus-visible .signal-gif,
+	.signal-column:nth-child(3).signal-active .signal-gif,
+	.signal-column:nth-child(4):hover .signal-gif,
+	.signal-column:nth-child(4):focus-visible .signal-gif,
+	.signal-column:nth-child(4).signal-active .signal-gif {
+		transform: translate(0, 0) rotate(-4deg) scale(1);
 	}
 	.work-section {
 		padding-top: 75px;

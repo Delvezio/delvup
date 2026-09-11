@@ -1,6 +1,6 @@
 import { introDone } from '$lib/stores/intro';
 
-type RevealDirection = 'top' | 'bottom' | 'title';
+type RevealDirection = 'top' | 'bottom' | 'title' | 'signal';
 
 /** Recreates the original Delvup direction, timing and title rotation. */
 export function revealOnView(root: HTMLElement) {
@@ -15,8 +15,9 @@ export function revealOnView(root: HTMLElement) {
 
 	collect('.brand, .site-header nav a, .theme-switch, .hero-topline > span', 'top');
 	collect('.title-line', 'title');
+	collect('.signal-column', 'signal');
 	collect(
-		'.hero-arrow, .hero-bottom > *, .hero-rule > span, .signals-heading .signal-arrow, .signal-column, .section-heading .eyebrow, .section-heading > p, .project, .approach-label > *, .about-copy p, .service > :not(.reveal-title), .contact > .eyebrow, .contact-bottom > *, .site-footer > *',
+		'.hero-arrow, .hero-bottom > *, .hero-rule > span, .signals-heading .signal-arrow, .section-heading .eyebrow, .section-heading > p, .project, .approach-label > *, .about-copy p, .service > :not(.reveal-title), .contact > .eyebrow, .contact-bottom > *, .site-footer > *',
 		'bottom'
 	);
 
@@ -28,6 +29,12 @@ export function revealOnView(root: HTMLElement) {
 			const title = element.closest('.reveal-title, h1');
 			const lines = title ? [...title.querySelectorAll<HTMLElement>('.title-line')] : [];
 			element.style.setProperty('--reveal-delay', `${Math.max(0, lines.indexOf(element)) * 140}ms`);
+		} else if (direction === 'signal') {
+			const columns = [...root.querySelectorAll<HTMLElement>('.signal-column')];
+			element.style.setProperty(
+				'--reveal-delay',
+				`${Math.max(0, columns.indexOf(element)) * 85}ms`
+			);
 		}
 	});
 
@@ -35,7 +42,9 @@ export function revealOnView(root: HTMLElement) {
 	let introFinished = false;
 
 	function show(element: HTMLElement, delay = 0) {
-		if (items.get(element) !== 'title') element.style.setProperty('--reveal-delay', `${delay}ms`);
+		if (!['title', 'signal'].includes(items.get(element)!)) {
+			element.style.setProperty('--reveal-delay', `${delay}ms`);
+		}
 		element.classList.remove('reveal-pending');
 		observer?.unobserve(element);
 	}

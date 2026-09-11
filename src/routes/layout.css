@@ -276,12 +276,27 @@ h1 .purple {
 	height: 460px;
 	padding: 0 24px;
 	border: 0;
-	border-left: 1px solid var(--line);
 	background: transparent;
 	color: var(--text);
 	text-align: left;
 	cursor: pointer;
 	overflow: visible;
+}
+.signal-column::after {
+	content: '';
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	width: 1px;
+	background: var(--line);
+	transform: scaleY(1);
+	transform-origin: top;
+	transition: transform 0.72s cubic-bezier(0.25, 0, 0, 1) var(--reveal-delay, 0ms);
+}
+.signal-column.reveal-pending::after {
+	transform: scaleY(0);
 }
 .signal-column:nth-child(2) {
 	height: 535px;
@@ -300,6 +315,13 @@ h1 .purple {
 	bottom: 0;
 	display: block;
 	max-width: 245px;
+	transition:
+		opacity 0.42s ease calc(var(--reveal-delay, 0ms) + 170ms),
+		transform 0.56s cubic-bezier(0.2, 0.7, 0.2, 1) calc(var(--reveal-delay, 0ms) + 170ms);
+}
+.signal-column.reveal-pending .signal-copy {
+	opacity: 0;
+	transform: translateY(18px);
 }
 .signal-marker {
 	position: relative;
@@ -1044,5 +1066,12 @@ h1 .purple {
 	}
 	.title-line.reveal-item {
 		animation: none;
+	}
+	.signal-column.reveal-pending::after {
+		transform: scaleY(1);
+	}
+	.signal-column.reveal-pending .signal-copy {
+		opacity: 1;
+		transform: none;
 	}
 }

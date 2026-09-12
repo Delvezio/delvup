@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import IntroBrand from '$lib/components/sections/IntroBrand.svelte';
-	import ScrollBlob from '$lib/components/visual/ScrollBlob.svelte';
 	import { introDone } from '$lib/stores/intro';
 	import { revealOnView } from '$lib/reveal';
 	let mounted = $state(false);
@@ -172,7 +171,6 @@
 				>{/each}
 		</div>
 	</header>
-	<ScrollBlob />
 	<main id="contenuto">
 		<section class="hero wrap" aria-labelledby="hero-title">
 			<div class="hero-topline">

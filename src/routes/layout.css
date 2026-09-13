@@ -126,11 +126,16 @@ button:focus-visible {
 	gap: 34px;
 	font-size: 15px;
 }
+.site-header nav a {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
 .site-header nav a:hover {
 	color: var(--accent);
 }
-.site-header nav span {
-	margin-left: 5px;
+.nav-arrow {
+	--arrow-size: 11px;
 }
 .theme-switch {
 	display: flex;
@@ -190,11 +195,9 @@ h1 .purple {
 }
 .hero-arrow {
 	position: absolute;
-	right: 3%;
-	top: 0;
-	line-height: 1;
-	font-size: 250px;
-	font-weight: 400;
+	right: 0;
+	top: 48px;
+	--arrow-size: clamp(150px, 20.35vw, 303px);
 	color: var(--line);
 	z-index: 0;
 }
@@ -556,8 +559,12 @@ h1 .purple {
 	margin-bottom: 0;
 }
 .project-arrow {
-	font-size: 30px;
-	line-height: 1;
+	--arrow-size: 27px;
+	transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project:hover .project-arrow,
+.project:focus-visible .project-arrow {
+	transform: translate(3px, -3px);
 }
 .project-domain {
 	display: block;
@@ -604,13 +611,18 @@ h1 .purple {
 	position: relative;
 	z-index: 2;
 }
+.approach-label {
+	position: relative;
+}
 .outline-arrow {
 	display: block;
-	font-size: 180px;
-	line-height: 1.1;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	--arrow-width: min(100%, 290px);
+	--arrow-height: auto;
 	color: var(--accent);
 	opacity: 0.45;
-	margin-top: 50px;
 }
 .approach-copy h2 {
 	font-size: clamp(32px, 4.3vw, 66px);
@@ -674,7 +686,7 @@ h1 .purple {
 }
 .service-plus {
 	color: var(--accent);
-	font-size: 33px;
+	--arrow-size: 29px;
 }
 .contact {
 	padding-top: 30px;
@@ -697,9 +709,9 @@ h1 .purple {
 	text-decoration-thickness: 3px;
 	text-underline-offset: 10px;
 }
-.contact h2 a span {
-	display: inline-block;
-	margin-left: 20px;
+.contact-title-arrow {
+	--arrow-size: 0.72em;
+	margin-left: 0.15em;
 }
 .contact-bottom {
 	display: flex;
@@ -708,9 +720,15 @@ h1 .purple {
 	gap: 20px;
 }
 .contact-bottom > a {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
 	font-size: clamp(20px, 2.4vw, 32px);
 	border-bottom: 1px solid var(--text);
 	padding-bottom: 5px;
+}
+.email-arrow {
+	--arrow-size: 0.7em;
 }
 .contact-bottom p {
 	font-size: 14px;
@@ -737,6 +755,9 @@ h1 .purple {
 	.hero-title-wrap {
 		padding-top: 65px;
 	}
+	.hero-arrow {
+		top: 65px;
+	}
 	.hero-bottom {
 		margin-top: 70px;
 	}
@@ -747,9 +768,6 @@ h1 .purple {
 	}
 	.theme-label {
 		display: none;
-	}
-	.hero-arrow {
-		font-size: 180px;
 	}
 	.project {
 		padding: 16px;
@@ -773,9 +791,6 @@ h1 .purple {
 	}
 	.approach {
 		grid-template-columns: 1fr 2.5fr;
-	}
-	.outline-arrow {
-		font-size: 120px;
 	}
 	.site-footer > span:nth-child(2) {
 		display: none;
@@ -821,8 +836,8 @@ h1 .purple {
 		letter-spacing: -0.055em;
 	}
 	.hero-arrow {
-		font-size: 115px;
-		top: 15px;
+		--arrow-size: 92px;
+		top: 10px;
 		right: 0;
 	}
 	.hero-bottom {
@@ -1008,8 +1023,8 @@ h1 .purple {
 		font-size: clamp(48px, 11.2vw, 77px);
 		margin-bottom: 35px;
 	}
-	.contact h2 a span {
-		margin-left: 8px;
+	.contact-title-arrow {
+		margin-left: 0.1em;
 	}
 	.contact-bottom {
 		align-items: start;

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import IntroBrand from '$lib/components/sections/IntroBrand.svelte';
+	import ArrowUpRight from '$lib/components/icons/ArrowUpRight.svelte';
 	import { introDone } from '$lib/stores/intro';
 	import { revealOnView } from '$lib/reveal';
 	let mounted = $state(false);
@@ -131,11 +132,7 @@
 				"@type": "Country",
 				"name": "Italia"
 			},
-			"serviceType": [
-				"Web design",
-				"Sviluppo siti web",
-				"Manutenzione e supporto web"
-			]
+			"serviceType": ["Web design", "Sviluppo siti web", "Manutenzione e supporto web"]
 		}
 	</script>
 </svelte:head>
@@ -153,9 +150,9 @@
 			/></a
 		>
 		<nav aria-label="Navigazione principale">
-			<a href="#lavori">Lavori <span>↗</span></a><a href="#approccio">Approccio</a><a
-				href="#contatti">Parliamone <span>↗</span></a
-			>
+			<a href="#lavori">Lavori <ArrowUpRight class="nav-arrow" /></a><a href="#approccio"
+				>Approccio</a
+			><a href="#contatti">Parliamone <ArrowUpRight class="nav-arrow" /></a>
 		</nav>
 		<div class="theme-switch" role="group" aria-label="Tema del sito">
 			{#each modes as option (option.value)}<button
@@ -179,9 +176,11 @@
 			<div class="hero-title-wrap">
 				<h1 id="hero-title">
 					<span class="title-line-mask"><span class="title-line">Progetto</span></span>
-					<span class="title-line-mask"><span class="title-line">il tuo <span class="purple">online.</span></span></span>
+					<span class="title-line-mask"
+						><span class="title-line">il tuo <span class="purple">online.</span></span></span
+					>
 				</h1>
-				<span class="hero-arrow" aria-hidden="true">↗</span>
+				<ArrowUpRight class="hero-arrow" variant="outline" />
 			</div>
 			<div class="hero-bottom">
 				<p>Siti essenziali per professionisti e PMI.<br />Chiari, veloci, mantenuti nel tempo.</p>
@@ -219,8 +218,7 @@
 						aria-label={`${signal.text} Mostra l’animazione.`}
 						onpointermove={moveSignalGif}
 						onpointerleave={resetSignalGif}
-						onclick={() =>
-							(activeSignal = activeSignal === signal.letter ? null : signal.letter)}
+						onclick={() => (activeSignal = activeSignal === signal.letter ? null : signal.letter)}
 					>
 						<span class="signal-gif" aria-hidden="true">
 							<img src={signal.gif} alt="" width="498" height="295" loading="lazy" />
@@ -243,7 +241,9 @@
 				<div>
 					<span class="eyebrow">01 / SELEZIONE</span>
 					<h2 id="work-title" class="reveal-title">
-						<span class="title-line-mask"><span class="title-line">Fatti, poi online<span class="purple">.</span></span></span>
+						<span class="title-line-mask"
+							><span class="title-line">Fatti, poi online<span class="purple">.</span></span></span
+						>
 					</h2>
 				</div>
 				<p>Tre realtà diverse.<br />Un progetto su misura, ogni volta.</p>
@@ -272,9 +272,7 @@
 							</h3>
 							<p>Salute e servizi, a portata di click.</p>
 						</div>
-						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
-							>↗</span
-						>
+						<ArrowUpRight class="project-arrow" />
 					</div>
 					<span class="project-domain">sanmichelefarmacia.com</span></a
 				>
@@ -301,9 +299,7 @@
 							</h3>
 							<p>Uno spazio per iniziare un percorso.</p>
 						</div>
-						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
-							>↗</span
-						>
+						<ArrowUpRight class="project-arrow" />
 					</div>
 					<span class="project-domain">giuliaforcignano.it</span></a
 				>
@@ -330,9 +326,7 @@
 							</h3>
 							<p>Identità e presenza, anche sul web.</p>
 						</div>
-						<span class="project-arrow" aria-label="Visita il sito, si apre in una nuova scheda"
-							>↗</span
-						>
+						<ArrowUpRight class="project-arrow" />
 					</div>
 					<span class="project-domain">dmcavvocati.it</span></a
 				>
@@ -340,16 +334,22 @@
 		</section>
 		<section id="approccio" class="approach wrap" aria-labelledby="approach-title">
 			<div class="approach-label">
-				<span class="eyebrow">02 / IL MIO APPROCCIO</span><span
+				<span class="eyebrow">02 / IL MIO APPROCCIO</span><ArrowUpRight
 					class="outline-arrow"
-					aria-hidden="true">↗</span
-				>
+					variant="outline"
+				/>
 			</div>
 			<div class="approach-copy">
 				<h2 id="approach-title" class="reveal-title">
-					<span class="title-line-mask"><span class="title-line">Non sono il tuo fornitore.</span></span>
-					<span class="title-line-mask"><span class="title-line">Sono un <span class="purple">partner,</span></span></span>
-					<span class="title-line-mask"><span class="title-line">un riferimento stabile.</span></span>
+					<span class="title-line-mask"
+						><span class="title-line">Non sono il tuo fornitore.</span></span
+					>
+					<span class="title-line-mask"
+						><span class="title-line">Sono un <span class="purple">partner,</span></span></span
+					>
+					<span class="title-line-mask"
+						><span class="title-line">un riferimento stabile.</span></span
+					>
 				</h2>
 				<div class="about-copy">
 					<p>
@@ -367,12 +367,14 @@
 			{#each [{ n: '01', title: 'Design.', subtitle: 'Dare forma alle idee.', text: 'Identità visiva e interfacce che parlano di te. Ogni scelta parte dalle persone che vuoi raggiungere.' }, { n: '02', title: 'Develop.', subtitle: 'Farle funzionare.', text: 'Siti chiari, veloci e adatti a ogni schermo. Un’esperienza semplice, dal primo accesso al contatto.' }, { n: '03', title: 'Care.', subtitle: 'Esserci, anche dopo.', text: 'Supporto, aggiornamenti e attenzione nel tempo. Il tuo sito cresce insieme alla tua attività.' }] as service (service.n)}
 				<div class="service">
 					<span class="service-number">{service.n}</span>
-					<h3 class="reveal-title"><span class="title-line-mask"><span class="title-line">{service.title}</span></span></h3>
+					<h3 class="reveal-title">
+						<span class="title-line-mask"><span class="title-line">{service.title}</span></span>
+					</h3>
 					<div>
 						<h4>{service.subtitle}</h4>
 						<p>{service.text}</p>
 					</div>
-					<span class="service-plus" aria-hidden="true">↗</span>
+					<ArrowUpRight class="service-plus" />
 				</div>
 			{/each}
 		</section>
@@ -381,10 +383,16 @@
 			<h2 id="contact-title" class="reveal-title">
 				<span class="title-line-mask"><span class="title-line">Hai un progetto</span></span>
 				<span class="title-line-mask"><span class="title-line">in mente?</span></span>
-				<span class="title-line-mask"><span class="title-line"><a href="mailto:ciao@delvup.com">Parliamone<span aria-hidden="true">↗</span></a></span></span>
+				<span class="title-line-mask"
+					><span class="title-line"
+						><a href="mailto:ciao@delvup.com"
+							>Parliamone<ArrowUpRight class="contact-title-arrow" /></a
+						></span
+					></span
+				>
 			</h2>
 			<div class="contact-bottom">
-				<a href="mailto:ciao@delvup.com">ciao@delvup.com ↗</a>
+				<a href="mailto:ciao@delvup.com">ciao@delvup.com <ArrowUpRight class="email-arrow" /></a>
 				<p>Una buona conversazione<br />è un ottimo punto di partenza.</p>
 			</div>
 		</section>

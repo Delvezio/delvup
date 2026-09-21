@@ -7,6 +7,7 @@
 	let mounted = $state(false);
 	let mode = $state('auto');
 	let activeSignal = $state<string | null>(null);
+	const showPortfolio = false;
 	const modes = [
 		{ value: 'light', label: 'Chiaro', icon: '☼' },
 		{ value: 'dark', label: 'Scuro', icon: '☾' },
@@ -39,7 +40,7 @@
 		}
 	];
 	const siteDescription =
-		'Sono Alessandro Delvezio: progetto siti web chiari, veloci e curati nel tempo per professionisti e PMI. Scopri i lavori di Delvup.';
+		'Sono Alessandro Delvezio: progetto siti web chiari, veloci e curati nel tempo per professionisti e PMI. Scopri l’approccio e i servizi di Delvup.';
 	function moveSignalGif(event: PointerEvent) {
 		if (event.pointerType === 'touch') return;
 		const column = event.currentTarget as HTMLElement;
@@ -150,8 +151,8 @@
 			/></a
 		>
 		<nav aria-label="Navigazione principale">
-			<a href="#lavori">Lavori <ArrowUpRight class="nav-arrow" /></a><a href="#approccio"
-				>Approccio</a
+			{#if showPortfolio}<a href="#lavori">Lavori <ArrowUpRight class="nav-arrow" /></a>{/if}<a
+				href="#approccio">Approccio</a
 			><a href="#contatti">Parliamone <ArrowUpRight class="nav-arrow" /></a>
 		</nav>
 		<div class="theme-switch" role="group" aria-label="Tema del sito">
@@ -236,102 +237,103 @@
 				{/each}
 			</div>
 		</section>
-		<section id="lavori" class="work-section wrap" aria-labelledby="work-title">
-			<div class="section-heading">
-				<div>
-					<span class="eyebrow">01 / SELEZIONE</span>
-					<h2 id="work-title" class="reveal-title">
-						<span class="title-line-mask"
-							><span class="title-line">Fatti, poi online<span class="purple">.</span></span></span
-						>
-					</h2>
+		{#if showPortfolio}<section id="lavori" class="work-section wrap" aria-labelledby="work-title">
+				<div class="section-heading">
+					<div>
+						<span class="eyebrow">01 / SELEZIONE</span>
+						<h2 id="work-title" class="reveal-title">
+							<span class="title-line-mask"
+								><span class="title-line">Fatti, poi online<span class="purple">.</span></span
+								></span
+							>
+						</h2>
+					</div>
+					<p>Tre realtà diverse.<br />Un progetto su misura, ogni volta.</p>
 				</div>
-				<p>Tre realtà diverse.<br />Un progetto su misura, ogni volta.</p>
-			</div>
-			<div class="projects">
-				<a
-					class="project project-pharmacy"
-					href="https://www.sanmichelefarmacia.com/"
-					target="_blank"
-					rel="noopener noreferrer"
-					><div class="folder-tab">01 / FARMACIA</div>
-					<div class="project-art">
-						<img
-							src="/projects/farmacia.webp"
-							alt="Anteprima del design di Farmacia San Michele"
-							width="1321"
-							height="917"
-							loading="lazy"
-						/>
-					</div>
-					<div class="project-info">
-						<div>
-							<h3 class="reveal-title">
-								<span class="title-line-mask"><span class="title-line">Farmacia</span></span>
-								<span class="title-line-mask"><span class="title-line">San Michele</span></span>
-							</h3>
-							<p>Salute e servizi, a portata di click.</p>
+				<div class="projects">
+					<a
+						class="project project-pharmacy"
+						href="https://www.sanmichelefarmacia.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						><div class="folder-tab">01 / FARMACIA</div>
+						<div class="project-art">
+							<img
+								src="/projects/farmacia.webp"
+								alt="Anteprima del design di Farmacia San Michele"
+								width="1321"
+								height="917"
+								loading="lazy"
+							/>
 						</div>
-						<ArrowUpRight class="project-arrow" />
-					</div>
-					<span class="project-domain">sanmichelefarmacia.com</span></a
-				>
-				<a
-					class="project project-psychology"
-					href="https://giuliaforcignano.it/"
-					target="_blank"
-					rel="noopener noreferrer"
-					><div class="folder-tab">02 / PROFESSIONISTI</div>
-					<div class="project-art">
-						<img
-							src="/projects/giulia.webp"
-							alt="Anteprima del sito della psicologa Giulia Forcignano"
-							width="1261"
-							height="907"
-							loading="lazy"
-						/>
-					</div>
-					<div class="project-info">
-						<div>
-							<h3 class="reveal-title">
-								<span class="title-line-mask"><span class="title-line">Giulia</span></span>
-								<span class="title-line-mask"><span class="title-line">Forcignano</span></span>
-							</h3>
-							<p>Uno spazio per iniziare un percorso.</p>
+						<div class="project-info">
+							<div>
+								<h3 class="reveal-title">
+									<span class="title-line-mask"><span class="title-line">Farmacia</span></span>
+									<span class="title-line-mask"><span class="title-line">San Michele</span></span>
+								</h3>
+								<p>Salute e servizi, a portata di click.</p>
+							</div>
+							<ArrowUpRight class="project-arrow" />
 						</div>
-						<ArrowUpRight class="project-arrow" />
-					</div>
-					<span class="project-domain">giuliaforcignano.it</span></a
-				>
-				<a
-					class="project project-law"
-					href="https://dmcavvocati.it/"
-					target="_blank"
-					rel="noopener noreferrer"
-					><div class="folder-tab">03 / STUDIO LEGALE</div>
-					<div class="project-art law-art">
-						<span class="law-wordmark">De Martiis<br />Catalano<span>AVVOCATI</span></span><img
-							src="/projects/apollo.webp"
-							alt="Busto classico, riferimento visivo del progetto De Martiis Catalano"
-							width="400"
-							height="400"
-							loading="lazy"
-						/>
-					</div>
-					<div class="project-info">
-						<div>
-							<h3 class="reveal-title">
-								<span class="title-line-mask"><span class="title-line">De Martiis</span></span>
-								<span class="title-line-mask"><span class="title-line">Catalano</span></span>
-							</h3>
-							<p>Identità e presenza, anche sul web.</p>
+						<span class="project-domain">sanmichelefarmacia.com</span></a
+					>
+					<a
+						class="project project-psychology"
+						href="https://giuliaforcignano.it/"
+						target="_blank"
+						rel="noopener noreferrer"
+						><div class="folder-tab">02 / PROFESSIONISTI</div>
+						<div class="project-art">
+							<img
+								src="/projects/giulia.webp"
+								alt="Anteprima del sito della psicologa Giulia Forcignano"
+								width="1261"
+								height="907"
+								loading="lazy"
+							/>
 						</div>
-						<ArrowUpRight class="project-arrow" />
-					</div>
-					<span class="project-domain">dmcavvocati.it</span></a
-				>
-			</div>
-		</section>
+						<div class="project-info">
+							<div>
+								<h3 class="reveal-title">
+									<span class="title-line-mask"><span class="title-line">Giulia</span></span>
+									<span class="title-line-mask"><span class="title-line">Forcignano</span></span>
+								</h3>
+								<p>Uno spazio per iniziare un percorso.</p>
+							</div>
+							<ArrowUpRight class="project-arrow" />
+						</div>
+						<span class="project-domain">giuliaforcignano.it</span></a
+					>
+					<a
+						class="project project-law"
+						href="https://dmcavvocati.it/"
+						target="_blank"
+						rel="noopener noreferrer"
+						><div class="folder-tab">03 / STUDIO LEGALE</div>
+						<div class="project-art law-art">
+							<span class="law-wordmark">De Martiis<br />Catalano<span>AVVOCATI</span></span><img
+								src="/projects/apollo.webp"
+								alt="Busto classico, riferimento visivo del progetto De Martiis Catalano"
+								width="400"
+								height="400"
+								loading="lazy"
+							/>
+						</div>
+						<div class="project-info">
+							<div>
+								<h3 class="reveal-title">
+									<span class="title-line-mask"><span class="title-line">De Martiis</span></span>
+									<span class="title-line-mask"><span class="title-line">Catalano</span></span>
+								</h3>
+								<p>Identità e presenza, anche sul web.</p>
+							</div>
+							<ArrowUpRight class="project-arrow" />
+						</div>
+						<span class="project-domain">dmcavvocati.it</span></a
+					>
+				</div>
+			</section>{/if}
 		<section id="approccio" class="approach wrap" aria-labelledby="approach-title">
 			<div class="approach-label">
 				<span class="eyebrow">02 / IL MIO APPROCCIO</span><ArrowUpRight
